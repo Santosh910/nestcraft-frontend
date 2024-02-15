@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import Header from '../component/Header'
+import api from './AxiosConfig';
 
 
 const Homepage = () => {
@@ -8,13 +9,16 @@ const Homepage = () => {
 
     const [catego,setCatego] = useState([])
 
-    // const [items,setItems] = useState([])
     const [selectedItems,setSelectedItems] = useState([])
+
+    // const [query,setQuery] = useState('');
+    // const[results,setResults] = useState([])
+
 
 
     const getCatgory = async()=>{
         try {
-            const {data} = await axios.get("http://localhost:8000/api/v1/categories/get-all")
+            const {data} = await api.get("/categories/get-all")
             if(data.success){
                    console.log(data,"data here")
                    setCatego(data.category)
@@ -39,12 +43,25 @@ const Homepage = () => {
 
     const handleDelete = async (_id)=>{
         try {
-             await axios.delete('http://localhost:8000/api/v1/categories/delete-item',{data:{ids:selectedItems}})
+             await api.delete('/categories/delete-item',{data:{ids:selectedItems}})
              getCatgory()
         } catch (error) {
             console.log("something went wrong",error)
         }
     }
+
+    // const handleInputChange = async (event)=>{
+    //     setQuery(event.target.value)
+    // }
+
+    // const handleSearch = async ()=>{
+    //     try {
+    //         const response = await api.get(`/categories/search?query = ${query}`)
+    //         setQuery(response.data);
+    //     } catch (error) {
+    //         console.log(error,"something went wrong")
+    //     }
+    // }
 
     return (
         
@@ -56,7 +73,7 @@ const Homepage = () => {
 
                 <h2>Service Category</h2>
 
-                <input style={{ width: "300px", height: "40px", marginTop: "10px", borderRadius: "15px",paddingLeft:"50px" }} type="search" placeholder='search category'/>
+                <input style={{ width: "300px", height: "40px", marginTop: "10px", borderRadius: "15px",paddingLeft:"50px" }} type="text" placeholder='search category'  />
 
                 <button style={{ width: "100px", height: "40px", marginTop: "10px", borderRadius: "15px", backgroundColor: "red" }} onClick={handleDelete}>Delete</button>
             </div>

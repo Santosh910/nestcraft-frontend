@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+
 import {useNavigate} from 'react-router-dom'
+import api from './AxiosConfig'
 
 
 const ViewSerCat = () => {
+    
     const [serCat,setSerCat] = useState({services:"",category:"",price:"",duration:"",gender:""})
     
 
@@ -18,10 +20,12 @@ const ViewSerCat = () => {
     const [sideNav, setSideNav] = useState(false)
     const [catego,setCatego] = useState({category_name:"",description:"",image:null})
 
+    
+
     useEffect(()=>{
         const getCatgory = async()=>{
               try {
-                  const {data} = await axios.get("http://localhost:8000/api/v1/categories/get-all")
+                  const {data} = await api.get("/categories/get-all")
                   if(data.success){
                          console.log(data,"data here")
                          setCategory(data.category)
@@ -33,9 +37,23 @@ const ViewSerCat = () => {
         getCatgory()
     },[])
 
-    
+    // useEffect(()=>{
+    //     const getSingleCat = async (req,res)=>{
+    //         try{
+    //             const response = await api.get(`/categories/get-single?id=${id}`)
+    //             if(response.data.success){
+    //                setCategoryData(response.data.category)
+    //             }
+    //         }catch(error){
+    //             console.log(error)
+    //         }
+    //       }
 
-    
+    //     if(id){
+    //         getSingleCat()
+    //     }
+    //   })
+
 
     const handleChange = (event)=>{
         setSerCat({...serCat,[event.target.name]:event.target.value})
@@ -45,7 +63,7 @@ const ViewSerCat = () => {
         event.preventDefault();
         if(serCat.services && serCat.category && serCat.price && serCat.duration && serCat.gender){
             try {
-                const response = await axios.post("http://localhost:8000/api/v1/sercategory/add-sercat",{serCat})
+                const response = await api.post("/sercategory/add-sercat",{serCat})
                 if(response.data.success){
                     console.log(response.data,"sercat added successfully...")
                     setSerCat({services:"",category:"",price:"",duration:"",gender:""})
@@ -61,7 +79,7 @@ const ViewSerCat = () => {
 
     const getAllData = async()=>{
         try {
-            const {data} = await axios.get("http://localhost:8000/api/v1/sercategory/get-allcat")
+            const {data} = await api.get("/sercategory/get-allcat")
             if(data.success){
                 console.log(data,"data here")
                 setGetSerCat(data.serCategory)
@@ -83,7 +101,7 @@ const ViewSerCat = () => {
     const handleUpClick = async(event)=>{
         event.preventDefault();
         try {
-            const {data} = await axios.post("http://localhost:8000/api/v1/sercategory/update-cat",{categoryData})
+            const {data} = await api.post("/sercategory/update-cat",{categoryData})
             console.log(data,"data updated")
         } catch (error) {
             console.log(error,"something went wrong")
@@ -92,7 +110,7 @@ const ViewSerCat = () => {
 
     const handleDelete = async (_id)=>{
         try {
-             await axios.delete('http://localhost:8000/api/v1/sercategory/delete-cat',{params:{_id}})
+             await api.delete('/sercategory/delete-cat',{params:{_id}})
              getAllData()
         } catch (error) {
             alert("PRODUCT DELETED")
@@ -118,7 +136,7 @@ const ViewSerCat = () => {
         formData.append('description',catego.description);
         formData.append('image',catego.image);
             try {
-                 await axios.post("http://localhost:8000/api/v1/categories/add-cat",{catego},{
+                 await api.post("/categories/add-cat",{catego},{
                     headers: { "Content-Type": "multipart/form-data" },
                   })
                 
@@ -128,8 +146,7 @@ const ViewSerCat = () => {
             
     }
 
-    
-
+   
    
   return (
     <div>

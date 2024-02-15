@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import axios from 'axios';
+
+import api from './AxiosConfig';
 
 const Header = () => {
     const [sideNav, setSideNav] = useState(false)
@@ -26,7 +27,7 @@ const Header = () => {
         formData.append('description',catego.description);
         formData.append('image',catego.image);
             try {
-                 await axios.post("http://localhost:8000/api/v1/categories/add-cat",formData,{
+                 await api.post("/categories/add-cat",formData,{
                     headers: { "Content-Type": "multipart/form-data" },
                   })
                   window.location.reload()
@@ -67,7 +68,7 @@ const Header = () => {
                 <div>
                     {
                         sideNav ?
-                            <div style={{ position: "fixed", top: "150px", left: "500px", width: "430px", backgroundColor: "white", zIndex: "10", borderRadius: "25px", height: "450px" }}>
+                            <div style={{ position: "absolute", top: "150px", left: "500px", width: "430px", backgroundColor: "white", zIndex: "10", borderRadius: "25px", height: "450px" }}>
                                 <div style={{ display: "flex", justifyContent: "space-between", marginLeft: "50px", borderBottom: "1px solid gray", height: "50px", width: "330px" }}>
                                     <div>
                                         <h3>Add New Service Category</h3>
