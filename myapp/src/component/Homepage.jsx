@@ -65,18 +65,18 @@ const Homepage = () => {
                      
                      <div>
                           {catego.map((cat)=> (
-                                 <div style={{display:"flex",marginLeft:"200px",width:"950px",justifyContent:"space-between",borderTop:"1px solid black",paddingTop:"20px"}}
+                                 <div style={{display:"flex",marginLeft:"200px",width:"950px",justifyContent:"space-between",borderTop:"1px solid black",paddingTop:"10px",height:"60px"}}
                                  key={cat._id}>
                                     <div>
                                         <input  type="checkbox" checked={selectedItems.includes(cat._id)} onChange={()=>handleCheckBoxChange(cat._id)}/>
                                     </div>
                                     
-                                    <div>
-                                        <img style={{width:"80px",borderRadius:"50%"}} src={cat.image} alt="img" />
+                                    <div style={{height:"80px"}}>
+                                        <img style={{width:"50px",borderRadius:"50%",border:"1px solid black"}} src={cat.image} alt="img" />
                                     </div>
-                                    <div style={{marginRight:"500px",marginTop:"-20px"}}>
-                                        <h2>{cat.category_name}</h2>
-                                        <p>{cat.description}</p>
+                                    <div style={{marginRight:"500px",marginTop:"-30px"}}>
+                                        <h4 >{cat.category_name}</h4>
+                                        <p style={{marginTop:"-20px"}}>{cat.description}</p>
                                     </div>
                                     
 

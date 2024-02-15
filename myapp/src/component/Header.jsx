@@ -5,14 +5,18 @@ import axios from 'axios';
 const Header = () => {
     const [sideNav, setSideNav] = useState(false)
     const [catego,setCatego] = useState({category_name:"",description:"",image:null})
+    
 
     const router = useNavigate()
 
     const handleChange = (event)=>{
         setCatego({...catego,[event.target.name]:event.target.value})
     }
+
+    
     const handleFileChange = (event)=>{
         setCatego({...catego,image:event.target.files[0]})
+        
     }
 
     const handleSubmit = async(event)=>{
@@ -28,6 +32,7 @@ const Header = () => {
                   window.location.reload()
                 
             } catch (error) {
+                alert ("file size is under 500KB")
                 console.log(error,"something went wrong")
             }
             
@@ -86,6 +91,7 @@ const Header = () => {
                                     </div>
                                     <div>
                                         <label style={{fontWeight:"bold"}}>Add Image</label><br />
+
                                         <input style={{marginTop:"8px"}} type="file" onChange={handleFileChange} name="image" />
                                     </div>
                                     <button style={{background:"black",color:"white ",marginLeft:"300px",width:"60px",height:"30px",borderRadius:"5px",outline:"none"}} type='submit'>Save</button>

@@ -95,6 +95,7 @@ const ViewSerCat = () => {
              await axios.delete('http://localhost:8000/api/v1/sercategory/delete-cat',{params:{_id}})
              getAllData()
         } catch (error) {
+            alert("PRODUCT DELETED")
             console.log("something went wrong",error)
         }
     }
@@ -218,7 +219,7 @@ const ViewSerCat = () => {
                 <tbody>
                     {getSerCat.map((getS)=>(
                        <tr >
-                        <th><input type="checkbox" value={getS._id} /></th>
+                        <th><input type="checkbox" value={categoryData._id} key={getS._id}/></th>
                         
                         <td value={categoryData.services} name="services"  onChange={handleUpdate} >{getS.services}</td>
                         <td value={categoryData.category} name="category"  onChange={handleUpdate}>{getS.category}</td>
@@ -241,13 +242,15 @@ const ViewSerCat = () => {
                         <td><input type="text" name="services" placeholder='Enter service name' onChange={handleChange}/></td>
                         <td><select name="category" onChange={handleChange} >
                             <option value="select category">select category</option>
-                            {/* {category.map((item)=>{
+                            {category.map((item)=>(
                                 <option >{item.category_name}</option>
-                            })
+                            )
+                                
+                            )
 
-                            } */}
-                            <option value="Hair service">Hair Service</option>
-                            <option value="massage">massage</option>
+                            }
+                            {/* <option value="Hair service">Hair Service</option>
+                            <option value="massage">massage</option> */}
                             </select>
                         </td>
                         <td><input type="number" name='price' placeholder='enter amount' onChange={handleChange}/></td>
