@@ -94,7 +94,7 @@ const Homepage = () => {
                             </div>
 
                             <div style={{ height: "80px" }}>
-                                <img style={{ width: "50px", borderRadius: "50%", border: "1px solid black" }} src={`http://localhost:8000/temp/${cat.imageUrl}`} alt="uploaded" />
+                                <img style={{ width: "50px", borderRadius: "50%", border: "1px solid black" }} src={cat.image} alt="img" />
                             </div>
                             <div style={{ marginRight: "500px", marginTop: "-30px" }}>
                                 <h4 >{cat.category_name}</h4>
