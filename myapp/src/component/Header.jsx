@@ -5,7 +5,7 @@ import api from './AxiosConfig';
 
 const Header = () => {
     const [sideNav, setSideNav] = useState(false)
-    const [catego,setCatego] = useState({category_name:"",description:"",image:null})
+    const [catego,setCatego] = useState({category_name:"",description:"",image:""})
     
 
     const router = useNavigate()
@@ -93,7 +93,7 @@ const Header = () => {
                                     <div>
                                         <label style={{fontWeight:"bold"}}>Add Image</label><br />
 
-                                        <input style={{marginTop:"8px"}} type="file" onChange={handleFileChange} name="image" />
+                                        <input style={{marginTop:"8px"}} type="file" onChange={handleFileChange} name="image"  accept="image/*" />
                                     </div>
                                     <button style={{background:"black",color:"white ",marginLeft:"300px",width:"60px",height:"30px",borderRadius:"5px",outline:"none"}} type='submit'>Save</button>
 

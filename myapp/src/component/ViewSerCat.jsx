@@ -19,6 +19,8 @@ const ViewSerCat = () => {
 
     const [sideNav, setSideNav] = useState(false)
     const [catego,setCatego] = useState({category_name:"",description:"",image:null})
+    // const [editingId, setEditingId] = useState(null);
+    // const [searchKeyword, setSearchKeyword] = useState('');
 
     
 
@@ -98,14 +100,19 @@ const ViewSerCat = () => {
         setCategoryData({...categoryData,[event.target.name]:event.target.value})
     }
 
-    const handleUpClick = async(event)=>{
-        event.preventDefault();
+    // const handleEdit = (id)=>{
+    //     setEditingId(id)
+    // }
+
+    const handleUpClick = async(id)=>{
+        
         try {
-            const {data} = await api.post("/sercategory/update-cat",{categoryData})
+            const {data} = await api.post("/sercategory/update-cat",{categoryData,id})
             console.log(data,"data updated")
         } catch (error) {
             console.log(error,"something went wrong")
         }
+        // setEditingId(null)
     }
 
     const handleDelete = async (_id)=>{
